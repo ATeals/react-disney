@@ -2,12 +2,12 @@ import { Component, ErrorInfo, ReactNode } from "react";
 
 interface Props {
     children?: ReactNode;
-    fallback?: React.FC<{ error: Error; handleRetry: () => void }>;
+    fallback?: React.FC<{ error: Error | Response; handleRetry?: () => void }>;
 }
 
 interface State {
     hasError: boolean;
-    error?: Error;
+    error?: Error | Response;
 }
 
 class ErrorBoundary extends Component<Props, State> {
@@ -15,13 +15,12 @@ class ErrorBoundary extends Component<Props, State> {
         hasError: false,
     };
 
-    public static getDerivedStateFromError(error: Error): State {
+    public static getDerivedStateFromError(error: Error | Response): State {
         return { hasError: true, error };
     }
 
     public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
         console.error("캐치한 에러:", error, errorInfo);
-        this.setState((state) => ({ ...state, error }));
     }
 
     public render() {
@@ -34,7 +33,7 @@ class ErrorBoundary extends Component<Props, State> {
                     }}
                 />
             ) : (
-                <h1>{this.state.error?.message} 에러!</h1>
+                <h1> 알 수 없는 에러!</h1>
             );
         }
 
