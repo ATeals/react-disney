@@ -1,12 +1,23 @@
 import { Outlet } from "react-router-dom";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 function App() {
     return (
         <>
-            <Outlet />
+            <ErrorBoundary fallback={FallBack}>
+                <Outlet />
+            </ErrorBoundary>
         </>
     );
 }
+
+const FallBack = ({ error }: { error: Error | Response }) => {
+    return (
+        <>
+            <h1>{error instanceof Response && error.status} 에러!!</h1>
+        </>
+    );
+};
 
 // interface Character {
 //     id: number;
