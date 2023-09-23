@@ -1,13 +1,15 @@
+import { AxiosError } from "axios";
 import { Component, ErrorInfo, ReactNode } from "react";
 
+export type Err = Error | Response | AxiosError;
 interface Props {
     children?: ReactNode;
-    fallback?: React.FC<{ error: Error | Response; handleRetry?: () => void }>;
+    fallback?: React.FC<{ error: Err; handleRetry?: () => void }>;
 }
 
 interface State {
     hasError: boolean;
-    error?: Error | Response;
+    error?: Err;
 }
 
 class ErrorBoundary extends Component<Props, State> {
