@@ -2,9 +2,11 @@ import { AxiosError } from "axios";
 import { Component, ErrorInfo, ReactNode } from "react";
 
 export type Err = Error | Response | AxiosError;
+
+export type FallbackProps = { error: Err; handleRetry?: () => void };
 interface Props {
     children?: ReactNode;
-    fallback?: React.FC<{ error: Err; handleRetry?: () => void }>;
+    fallback?: React.FC<FallbackProps>;
 }
 
 interface State {

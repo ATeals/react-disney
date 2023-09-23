@@ -6,6 +6,7 @@ import { json, useParams } from "react-router-dom";
 import { Container, Modal, Spiner } from "./styled";
 import { CharacterDetailModal } from "./CharacterDetail";
 import { ErrorFallback } from "./ErrorFallback";
+import { QueryErrorResetBoundary } from "@tanstack/react-query";
 
 const S = { Container, Modal, Spiner };
 
@@ -22,11 +23,13 @@ const Detail = () => {
 
     return (
         <S.Container onClick={clickModalDisable}>
-            <ErrorBoundary fallback={ErrorFallback}>
-                <Suspense fallback={<Spiner />}>
-                    <CharacterDetailModal id={id} />
-                </Suspense>
-            </ErrorBoundary>
+            <QueryErrorResetBoundary>
+                <ErrorBoundary fallback={ErrorFallback}>
+                    <Suspense fallback={<Spiner />}>
+                        <CharacterDetailModal id={id} />
+                    </Suspense>
+                </ErrorBoundary>
+            </QueryErrorResetBoundary>
         </S.Container>
     );
 };
