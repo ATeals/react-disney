@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+    background-color: ${(props) => props.theme.color.background};
     width: 680px;
     margin: 0 auto;
     align-items: center;
@@ -28,4 +29,12 @@ export const GridContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3개의 열을 동일한 너비로 설정 */
     grid-gap: 20px; /* 열과 행 사이의 간격 설정 */
+`;
+
+export const PikerContainer = styled.div`
+    margin: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
 `;

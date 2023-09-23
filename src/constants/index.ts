@@ -4,3 +4,5 @@ export const QueryKey = {
     CHARACTER: "chareacter",
     CHARACTERS: "chareacters",
 };
+
+export const BACKGROUNDCOLOR = "backgroundColor";

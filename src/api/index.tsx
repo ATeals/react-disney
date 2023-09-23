@@ -16,8 +16,6 @@ const Axios = axios.create({
 const request = async (url: string) => {
     const res = await Axios.get(url);
 
-    console.log(res);
-
     if (res.status !== 200) throw new Response("Api Error", { status: 500 });
 
     return res.data;
