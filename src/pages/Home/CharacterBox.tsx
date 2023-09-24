@@ -8,6 +8,7 @@ const S = { ShadowBox, CharacterImg };
 
 export const ChareacterBox = memo(({ character }: { character: Character }) => {
     const { id, name, imageUrl } = character;
+
     return (
         <Link to={`detail/${id}`}>
             <S.ShadowBox>
@@ -21,3 +22,7 @@ export const ChareacterBox = memo(({ character }: { character: Character }) => {
         </Link>
     );
 });
+
+export const Skeleton = () => {
+    return <S.ShadowBox></S.ShadowBox>;
+};

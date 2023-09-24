@@ -1,20 +1,12 @@
-import { Api } from "@/api";
-import { QueryKey } from "@/constants";
-import { Character } from "@/type";
-import { useQuery } from "@tanstack/react-query";
-
 import { Outlet } from "react-router-dom";
 import { Container, GridContainer, PikerContainer } from "./styled";
-import { ChareacterBox } from "./CharacterBox";
 import BackgroundColorPicker from "@/components/BackgroundColorPicker";
+import CharacterList, { Skeleton as SkeletonCharacterList } from "./CharacterList";
+import { Suspense } from "react";
 
 const S = { Container, GridContainer, PikerContainer };
 
 const Home = () => {
-    const { data } = useQuery<Character[]>([QueryKey.CHARACTERS], Api.getCharacters);
-
-    const chracters = data?.slice(0, 102);
-
     return (
         <S.Container>
             <img
@@ -25,13 +17,9 @@ const Home = () => {
                 <BackgroundColorPicker />
             </S.PikerContainer>
             <S.GridContainer>
-                {chracters &&
-                    chracters.map((character) => (
-                        <ChareacterBox
-                            key={character.id}
-                            character={character}
-                        />
-                    ))}
+                <Suspense fallback={<SkeletonCharacterList />}>
+                    <CharacterList />
+                </Suspense>
             </S.GridContainer>
             <Outlet />
         </S.Container>
