@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
     background-color: ${(props) => props.theme.color.background};
     width: 680px;
-    margin: 0 auto;
+    margin: auto;
     align-items: center;
 `;
 

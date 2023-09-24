@@ -1,26 +1,18 @@
-import { createBrowserRouter, useRouteError } from "react-router-dom";
-
-import App from "@/App";
-
-import { Home, Detail } from "@/pages";
+import { createBrowserRouter } from "react-router-dom";
 
 import { Suspense } from "react";
 
-const Errorboundary = () => {
-    const error = useRouteError();
-    console.log(error);
-    return (
-        <>
-            <h1>에러!</h1>
-        </>
-    );
-};
+import { Home, Detail } from "@/pages";
+
+import App from "@/App";
+
+import GlobalErrorBoundary from "./GlobalErrorBoundary";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <App />,
-        errorElement: <Errorboundary />,
+        errorElement: <GlobalErrorBoundary />,
         children: [
             {
                 path: "/",
