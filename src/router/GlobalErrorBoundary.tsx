@@ -1,3 +1,4 @@
+import ErrorPage from "@/pages/ErrorPage";
 import { AxiosError } from "axios";
 import { isRouteErrorResponse, useRouteError } from "react-router-dom";
 
@@ -7,14 +8,7 @@ const GlobalErrorBoundary = () => {
     console.log(error, isRouteErrorResponse(error));
 
     if (isRouteErrorResponse(error)) {
-        switch (error.status) {
-            case 404:
-                return <h1>Page Not Found</h1>;
-            case 500:
-                return <h1>Server Error</h1>;
-            default:
-                return <h1>Error</h1>;
-        }
+        return <ErrorPage status={error.status} />;
     }
 
     if (error instanceof AxiosError) {
